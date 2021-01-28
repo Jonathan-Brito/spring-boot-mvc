@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jonathan.brito.spring.boot.domain.Departamento;
-import com.jonathan.brito.spring.boot.service.DepartamentoService;
+import com.mballem.curso.boot.domain.Departamento;
+import com.mballem.curso.boot.service.DepartamentoService;
 
 @Controller
 @RequestMapping("/departamentos")
-public class DepartametoController {
+public class DepartamentoController {
 	
 	@Autowired
 	private DepartamentoService service;
-	
+
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamento) {
 		return "/departamento/cadastro";
@@ -26,12 +27,13 @@ public class DepartametoController {
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("departamentos", service.buscarTodos());
-		return "/departamento/lista";
+		return "/departamento/lista"; 
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(Departamento departamento) {
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
+		attr.addFlashAttribute("success", "Departamento inserido com sucesso.");
 		return "redirect:/departamentos/cadastrar";
 	}
 	
@@ -41,11 +43,25 @@ public class DepartametoController {
 		return "/departamento/cadastro";
 	}
 	
-	@PostMapping
-	public String editar(Departamento departamento) {
+	@PostMapping("/editar")
+	public String editar(Departamento departamento, RedirectAttributes attr) {
 		service.editar(departamento);
+		attr.addFlashAttribute("success", "Departamento editado com sucesso.");
 		return "redirect:/departamentos/cadastrar";
-		
 	}
-
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+		
+		if (service.depertamentoTemCargos(id)) {
+			model.addAttribute("fail", "Departamento não removido. Possui cargo(s) vinculado(s).");
+		} else {
+			service.excluir(id);
+			model.addAttribute("success", "Departamento excluído com sucesso.");
+		}
+		
+		return listar(model);
+	}
+	
+	
 }

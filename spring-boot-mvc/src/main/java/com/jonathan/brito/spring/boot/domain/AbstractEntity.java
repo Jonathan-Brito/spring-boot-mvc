@@ -7,7 +7,7 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable {
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ID id;
 
@@ -47,8 +47,5 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
 	@Override
 	public String toString() {
 		return "id = " + id;
-	}
-	
-	
-
+	}	
 }

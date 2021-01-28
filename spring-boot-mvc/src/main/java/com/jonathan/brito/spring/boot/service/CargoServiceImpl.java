@@ -17,20 +17,17 @@ public class CargoServiceImpl implements CargoService {
 
 	@Override
 	public void salvar(Cargo cargo) {
-		dao.save(cargo);
-		
+		dao.save(cargo);		
 	}
 
 	@Override
 	public void editar(Cargo cargo) {
-		dao.update(cargo);
-		
+		dao.update(cargo);		
 	}
 
 	@Override
 	public void excluir(Long id) {
-		dao.delete(id);
-		
+		dao.delete(id);		
 	}
 
 	@Override @Transactional(readOnly = true)
@@ -44,5 +41,4 @@ public class CargoServiceImpl implements CargoService {
 		
 		return dao.findAll();
 	}
-
 }

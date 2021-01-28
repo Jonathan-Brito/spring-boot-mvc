@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head><meta charset="UTF-8"/></head>
-    
 <body>
 	
-
 	    <section class="layout-content" layout:fragment="corpo">
 	        <div class="page-header">
 	            <nav class="navbar navbar-expand-md navbar-top bg-light">
@@ -16,7 +14,7 @@
 	                        </li>
 	                    </ul>
 	                </div>
-	                <a class="btn btn-primary btn-md" href="/funcionarios/listar" role="button">
+	                <a class="btn btn-primary btn-md" href="@{/funcionarios/listar}" role="button">
 	                    <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 	                    <span>Listar Funcionários</span>
 	                </a>
@@ -172,6 +170,5 @@
 	            </form>
 	        </div>
 	    </section>
-
 </body>
-</html>		
+</html>				
