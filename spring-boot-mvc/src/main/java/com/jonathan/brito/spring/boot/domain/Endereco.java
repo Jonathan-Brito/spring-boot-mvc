@@ -1,5 +1,6 @@
 package com.jonathan.brito.spring.boot.domain;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
