@@ -43,13 +43,13 @@ public class FuncionarioController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Funcionario funcionario) {
-		return "/funcionario/cadastro";
+		return "funcionario/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("funcionarios", funcionarioService.buscarTodos());
-		return "/funcionario/lista"; 
+		return "funcionario/lista"; 
 	}
 	
 	@PostMapping("/salvar")
@@ -74,7 +74,7 @@ public class FuncionarioController {
 	public String editar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/funcionario/cadastro";
+			return "funcionario/cadastro";
 		}
 		
 		funcionarioService.editar(funcionario);
